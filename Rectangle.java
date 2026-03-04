@@ -159,4 +159,8 @@ public class Rectangle {
     return NUMBER_OF_SIDES;
   }
 
+  public String toString(){
+    return "Rectangle[x="+originX+",y="+originY+",w="+width+",h="+height+"]";
+  }
+
 }
