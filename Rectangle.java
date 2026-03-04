@@ -43,5 +43,80 @@ public class Rectangle {
   public double getPerimeter() {
     return 2 * (width + height);
   }
-  
+
+  public void scale(double scaleX, double scaleY) {
+    height *= scaleY;
+    width *= scaleX;
+  }
+
+  public void scale(double scaler){
+    height *= scaler;
+    width *= scaler;
+  }
+
+  public boolean isOverlappedWith(Rectangle r){
+    boolean overlapwidth = false;
+    boolean overlapheight = false;
+    double RecUpperWidth = (this.originX + (0.5 * this.width));
+    double RecLowerWidth = (this.originX - (0.5 * this.width));
+    double rLowerWidth = (r.originX - 0.5 * r.width);
+    double rUpperWidth = (r.originX + 0.5 * r.width);
+    double RecUpperHeight = this.originY + 0.5 * this.height;
+    double RecLowerHeight = this.originY - 0.5 * this.height;
+    double rLowerHeight = r.originY - 0.5 * r.height;
+    double rUpperHeight = r.originY + 0.5 * r.height;
+
+    if (Double.compare(RecUpperWidth,rLowerWidth) >= 0 && Double.compare(rLowerWidth, RecLowerWidth) >= 0){
+      overlapwidth = true;
+    }
+    else if (Double.compare(RecUpperWidth,rUpperWidth) >= 0 && Double.compare(rUpperWidth, RecLowerWidth) >= 0){
+      overlapwidth = true;
+    }
+
+    if (Double.compare(RecUpperHeight, rLowerHeight) >= 0 && Double.compare(rLowerHeight,RecLowerHeight) >= 0){
+      overlapheight = true;
+    }
+    else if (Double.compare(RecUpperHeight, rUpperHeight) >= 0 && Double.compare(rUpperHeight,RecLowerHeight)>=0){
+      overlapheight = true;
+    }
+
+    if (overlapheight == true && overlapwidth == true){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public static boolean areOverlapping(Rectangle r1, Rectangle r2){
+    boolean result = r1.isOverlappedWith(r2);
+    if (result == true){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public double calcRatio(){
+    double ratio;
+    if (height > width) {
+      ratio = width/height;
+    }
+    else {
+      ratio = height/width;
+    }
+    return ratio;
+  }
+
+  public boolean isSquare(Rectangle r){
+    double rat = r.calcRatio();
+    if (Double.compare(0.999,rat) < 0 && Double.compare(1.001,rat) > 0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 }
